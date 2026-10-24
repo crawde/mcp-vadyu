@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "vadyu": {
+      "url": "https://vadyu.com/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${VADYU_API_KEY}"
+      }
+    }
+  }
+}
