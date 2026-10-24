@@ -1,0 +1,43 @@
+{
+  "name": "mcp-vadyu",
+  "version": "1.0.0",
+  "mcpName": "com.vadyu/vadyu",
+  "description": "Official Model Context Protocol (MCP) server for Vadyu AI Video Ad Studio — generate commercial multi-shot product video ads from image URLs.",
+  "type": "module",
+  "main": "vadyu-mcp.mjs",
+  "bin": {
+    "mcp-vadyu": "vadyu-mcp.mjs"
+  },
+  "files": [
+    "vadyu-mcp.mjs",
+    "server.json",
+    "glama.json",
+    "smithery.yaml",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "start": "node vadyu-mcp.mjs"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "vadyu",
+    "ai-video-ads",
+    "video-generation",
+    "product-video",
+    "tiktok-ads",
+    "ugc-ads",
+    "ecommerce",
+    "claude",
+    "cursor"
+  ],
+  "author": "Vadyu <hello@vadyu.com> (https://vadyu.com)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/crawde/mcp-vadyu.git"
+  },
+  "homepage": "https://vadyu.com/api-docs#mcp"
+}

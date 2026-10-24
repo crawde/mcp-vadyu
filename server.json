@@ -1,0 +1,32 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.vadyu/vadyu",
+  "title": "Vadyu AI Video Ad Studio",
+  "description": "Generate commercial multi-shot AI product video ads from image URLs with coherence grading.",
+  "version": "1.0.0",
+  "websiteUrl": "https://vadyu.com/api-docs",
+  "icons": [
+    {
+      "src": "https://vadyu.com/icon.png",
+      "mimeType": "image/png"
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/crawde/mcp-vadyu",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://vadyu.com/api/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Bearer vadyu_live_<API_KEY> from https://vadyu.com/dashboard",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}

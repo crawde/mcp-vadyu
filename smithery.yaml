@@ -1,0 +1,18 @@
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    required:
+      - vadyuApiKey
+    properties:
+      vadyuApiKey:
+        type: string
+        description: Your Vadyu API key (vadyu_live_...) from https://vadyu.com/dashboard
+  commandFunction: |-
+    (config) => ({
+      command: 'node',
+      args: ['vadyu-mcp.mjs'],
+      env: {
+        VADYU_API_KEY: config.vadyuApiKey
+      }
+    })
