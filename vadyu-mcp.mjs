@@ -42,30 +42,26 @@ if (process.argv.includes("--help") || process.argv.includes("-h")) {
 }
 
 const SERVER_INSTRUCTIONS =
-  "Vadyu 2.0 AI Commercial Video Ad Studio MCP Server. Public tools (vadyu_preview_storefront, vadyu_list_recipes, vadyu_list_sequences_and_formats), resources (vadyu://catalog/styles, vadyu://pricing/packs), and prompts work immediately with zero authentication. Video rendering and account tools require VADYU_API_KEY (vadyu_live_...) from https://vadyu.com/dashboard.";
-
-const CURATED_STYLES =
-  "flagship_launch, problem_solution, ugc_testimonial, tiktok_hook_3cut, creator_vlog, luxury_editorial, minimalist_apple, cyberpunk_neon, nature_botanical, kinetic_streetwear, food_sensory, flash_offer_drop, unbox_reveal, founder_story, macro_craft, clinical_proof, split_comparison, social_proof_wall, podcast_clip, seasonal_gift";
-
-const CAMPAIGN_FUNNELS =
-  "full_funnel_3pack, ecommerce_launch, tiktok_hook_lab, meta_advantage_plus, beauty_skincare_funnel, beverage_food_funnel, fashion_apparel_funnel, supplement_wellness_funnel, tech_gadget_funnel, home_fragrance_funnel, luxury_prestige_funnel, flash_sale_promo, ugc_social_proof_pack, founder_brand_story, amazon_pdp_pack, holiday_gifting_pack";
+  "Vadyu 2.0 Commercial Video Ad Studio. Public read-only tools (vadyu_preview_storefront, vadyu_list_recipes, vadyu_list_sequences_and_formats), resources, and prompts need no API key. Rendering and account tools use VADYU_API_KEY (vadyu_live_...) from https://vadyu.com/dashboard.";
 
 const MCP_TOOLS = [
   {
     name: "vadyu_preview_storefront",
     title: "Preview Storefront Products",
     description:
-      "Public zero-credit preview: extract up to 4 hero product packshots, recommended Vadyu 2.0 commercial ad style, and a 1-click preloaded Studio URL from any Shopify or DTC store URL (no API key required).",
+      "Extract up to 4 hero SKUs, recommended Vadyu 2.0 ad style, and preloaded Studio link from a Shopify or DTC URL (no API key).",
     inputSchema: {
       type: "object",
       additionalProperties: false,
       properties: {
         url: {
           type: "string",
-          description: "Public Shopify or DTC storefront or product page URL (e.g. https://www.voluspa.com).",
+          description: "Public Shopify or DTC storefront/product URL.",
+          examples: ["https://www.voluspa.com"],
         },
       },
       required: ["url"],
+      examples: [{ url: "https://www.voluspa.com" }],
     },
     annotations: {
       title: "Preview Storefront Products",
@@ -74,79 +70,38 @@ const MCP_TOOLS = [
       idempotentHint: true,
       openWorldHint: true,
     },
-    examples: [{ url: "https://www.voluspa.com" }, { url: "https://fischersund.com" }],
+    examples: [{ url: "https://www.voluspa.com" }],
   },
   {
     name: "vadyu_generate_video_ad",
     title: "Generate Commercial Video Ad",
     description:
-      "Generate a commercial multi-cut AI video ad (with precision product cutout, live-action 3D studio lighting, golden-hour lifestyle scene, and AI studio voiceover) from a product_url, image_url, image_base64, or 0-credit reuse_video_id.",
+      "Render a multi-cut AI commercial video ad (3D studio lighting, lifestyle scene, and voiceover) from a URL, image, or reuse_video_id.",
     inputSchema: {
       type: "object",
       additionalProperties: false,
       properties: {
-        product_url: {
-          type: "string",
-          description: "Public Shopify or DTC storefront or product page URL to auto-extract packaging, brand, and copy.",
-        },
-        image_url: {
-          type: "string",
-          description: "Direct public HTTPS URL of a product packshot or portrait reference photo.",
-        },
-        image_base64: {
-          type: "string",
-          description: "Base64-encoded image string or data URL of a product or portrait photo.",
-        },
-        reuse_video_id: {
-          type: "number",
-          description: "Optional completed Vadyu video ID to instantly restitch with new CTA or aspect ratio at 0 credits.",
-        },
-        recipe: {
-          type: "string",
-          description: `Commercial ad style ID ('auto' or one of the 20 curated styles: ${CURATED_STYLES}).`,
-        },
-        campaign_preset: {
-          type: "string",
-          description: `Optional 3-ad full-funnel preset ID (${CAMPAIGN_FUNNELS}).`,
-        },
+        product_url: { type: "string", description: "Public Shopify or DTC product/store URL." },
+        image_url: { type: "string", description: "Direct HTTPS product or portrait image URL." },
+        image_base64: { type: "string", description: "Base64 or data URL of input photo." },
+        reuse_video_id: { type: "number", description: "Completed video ID to restitch at 0 credits." },
+        recipe: { type: "string", description: "Style ID (e.g. flagship_launch, horology_atelier, or 'auto')." },
+        campaign_preset: { type: "string", description: "3-ad funnel ID (e.g. dtc_flagship_funnel, spirits_funnel)." },
         recipe_variants: {
           type: "array",
           items: { type: "string" },
-          description: "Optional array of up to 4 commercial ad style IDs to render in parallel.",
+          description: "Up to 4 style IDs to render in parallel.",
         },
-        format: {
-          type: "string",
-          description: "Commercial aspect ratio: 9:16 (TikTok/Reels), 4:5 (Meta Feed), 1:1 (Square), or 16:9 (YouTube/CTV).",
-        },
-        voiceover: {
-          type: "boolean",
-          description: "Enable studio AI voiceover narration (defaults to the selected style default).",
-        },
-        audio_mood: {
-          type: "string",
-          description: "Optional procedural background score mood ID (e.g. luxury_ambient, upbeat_pop, warm_acoustic).",
-        },
-        brand_text: {
-          type: "string",
-          description: "Optional brand headline shown on commercial title and end cards.",
-        },
-        brand_subtext: {
-          type: "string",
-          description: "Optional product subtitle or tagline shown on cards.",
-        },
-        cta_text: {
-          type: "string",
-          description: "Optional call-to-action button copy on the closing card (e.g. 'Shop Now').",
-        },
-        prompt: {
-          type: "string",
-          description: "Optional creative direction notes for lighting, mood, or scene staging.",
-        },
-        wait_for_completion: {
-          type: "boolean",
-          description: "When true in local stdio mode, automatically polls until the MP4 render completes (~60s).",
-        },
+        format: { type: "string", description: "Aspect ratio: 9:16, 4:5, 1:1, or 16:9." },
+        voiceover: { type: "boolean", description: "Enable studio AI voiceover narration." },
+        audio_mood: { type: "string", description: "Background music mood ID." },
+        brand_text: { type: "string", description: "Brand headline for title/end cards." },
+        brand_subtext: { type: "string", description: "Product subtitle for cards." },
+        cta_text: { type: "string", description: "Closing call-to-action button copy." },
+        prompt: { type: "string", description: "Creative direction notes for scene staging." },
+        wait_for_completion: { type: "boolean", description: "Poll until MP4 render completes (~60s)." },
       },
+      examples: [{ product_url: "https://www.voluspa.com", recipe: "auto", format: "9:16" }],
     },
     annotations: {
       title: "Generate Commercial Video Ad",
@@ -155,25 +110,20 @@ const MCP_TOOLS = [
       idempotentHint: false,
       openWorldHint: true,
     },
-    examples: [
-      { product_url: "https://www.voluspa.com", recipe: "auto", format: "9:16" },
-      { image_url: "https://vadyu.com/icon.png", recipe: "flagship_launch", format: "4:5", cta_text: "Shop Now" },
-    ],
+    examples: [{ product_url: "https://www.voluspa.com", recipe: "auto", format: "9:16" }],
   },
   {
     name: "vadyu_get_video_status",
     title: "Get Video Render Status",
-    description: "Check render progress, MP4 video download URL, coherence score, and shareable Screening-Room URL for a Vadyu video ID.",
+    description: "Get render status, MP4 download URL, coherence score, and share URL for a video ID.",
     inputSchema: {
       type: "object",
       additionalProperties: false,
       properties: {
-        video_id: {
-          type: "number",
-          description: "Numeric Vadyu video job ID returned by vadyu_generate_video_ad.",
-        },
+        video_id: { type: "number", description: "Numeric video job ID.", examples: [1580] },
       },
       required: ["video_id"],
+      examples: [{ video_id: 1580 }],
     },
     annotations: {
       title: "Get Video Render Status",
@@ -187,8 +137,8 @@ const MCP_TOOLS = [
   {
     name: "vadyu_list_recipes",
     title: "List Commercial Ad Styles",
-    description: "List all 20 curated Vadyu 2.0 Commercial Ad Styles, 16 3-ad campaign funnels, and 9 procedural audio moods (no API key required).",
-    inputSchema: { type: "object", additionalProperties: false, properties: {} },
+    description: "List all 20 Vadyu 2.0 commercial ad styles, 16 campaign funnels, and 9 audio moods (no API key).",
+    inputSchema: { type: "object", additionalProperties: false, properties: {}, examples: [{}] },
     annotations: {
       title: "List Commercial Ad Styles",
       readOnlyHint: true,
@@ -201,8 +151,8 @@ const MCP_TOOLS = [
   {
     name: "vadyu_list_sequences_and_formats",
     title: "List Ad Formats & Styles",
-    description: "List supported commercial aspect ratios (9:16, 4:5, 1:1, 16:9), ad placements, and curated style IDs (no API key required).",
-    inputSchema: { type: "object", additionalProperties: false, properties: {} },
+    description: "List supported commercial aspect ratios (9:16, 4:5, 1:1, 16:9) and style IDs (no API key).",
+    inputSchema: { type: "object", additionalProperties: false, properties: {}, examples: [{}] },
     annotations: {
       title: "List Ad Formats & Styles",
       readOnlyHint: true,
@@ -215,8 +165,8 @@ const MCP_TOOLS = [
   {
     name: "vadyu_get_account_quota",
     title: "Get Account Video Quota",
-    description: "Check remaining video generation credits and active credit pack or monthly studio plan on the authenticated account.",
-    inputSchema: { type: "object", additionalProperties: false, properties: {} },
+    description: "Get remaining video credits and active credit pack or plan.",
+    inputSchema: { type: "object", additionalProperties: false, properties: {}, examples: [{}] },
     annotations: {
       title: "Get Account Video Quota",
       readOnlyHint: true,
@@ -229,16 +179,14 @@ const MCP_TOOLS = [
   {
     name: "vadyu_list_videos",
     title: "List Generated Videos",
-    description: "List recent generated commercial video ads on the authenticated Vadyu account with MP4 and share URLs.",
+    description: "List recent generated video ads on the authenticated account.",
     inputSchema: {
       type: "object",
       additionalProperties: false,
       properties: {
-        limit: {
-          type: "number",
-          description: "Maximum number of recent videos to return (1 to 50, default 10).",
-        },
+        limit: { type: "number", description: "Max videos to return (1-50, default 10).", examples: [10] },
       },
+      examples: [{ limit: 10 }],
     },
     annotations: {
       title: "List Generated Videos",
@@ -254,14 +202,14 @@ const MCP_TOOLS = [
 const MCP_RESOURCES = [
   {
     uri: "vadyu://catalog/styles",
-    name: "Vadyu 2.0 Commercial Ad Styles & Campaign Funnels",
-    description: "Live JSON catalog of all 20 curated commercial ad styles, 16 3-ad campaign funnels, 9 audio moods, and 4 aspect ratios.",
+    name: "Vadyu 2.0 Ad Styles & Funnels",
+    description: "JSON catalog of 20 commercial ad styles, 16 funnels, 9 audio moods, and 4 aspect ratios.",
     mimeType: "application/json",
   },
   {
     uri: "vadyu://pricing/packs",
-    name: "Vadyu 2.0 Self-Serve Credit Packs & API Access",
-    description: "Self-serve video credit packs ($9 Creator Pack, $29 Brand Starter Pack) and monthly studio plans that unlock vadyu_live_... REST & MCP API keys.",
+    name: "Vadyu 2.0 Credit Packs & Plans",
+    description: "Credit packs ($9 Creator Pack, $29 Starter Pack) and monthly plans unlocking API & MCP keys.",
     mimeType: "application/json",
   },
 ];
