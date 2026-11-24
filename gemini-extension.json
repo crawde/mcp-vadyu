@@ -1,0 +1,12 @@
+{
+  "name": "vadyu",
+  "version": "2.0.0",
+  "description": "Preview Shopify/DTC storefronts and generate commercial multi-cut 9:16, 4:5, 1:1, and 16:9 AI video ads with 3D studio lighting and voiceover.",
+  "mcpServers": {
+    "vadyu": {
+      "command": "node",
+      "args": ["${extensionPath}${/}vadyu-mcp.mjs"],
+      "cwd": "${extensionPath}"
+    }
+  }
+}

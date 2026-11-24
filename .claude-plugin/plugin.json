@@ -1,0 +1,14 @@
+{
+  "name": "vadyu",
+  "version": "2.0.0",
+  "description": "Vadyu 2.0 AI Commercial Video Ad Studio — preview any Shopify or DTC store URL with zero auth and render multi-cut 9:16, 4:5, 1:1, and 16:9 commercial video ads.",
+  "author": {
+    "name": "Vadyu",
+    "email": "hello@vadyu.com",
+    "url": "https://vadyu.com"
+  },
+  "homepage": "https://vadyu.com/api-docs#mcp",
+  "repository": "https://github.com/crawde/mcp-vadyu",
+  "license": "MIT",
+  "keywords": ["mcp", "video-ads", "shopify", "ecommerce", "marketing", "tiktok", "meta-ads"]
+}

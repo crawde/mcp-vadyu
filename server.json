@@ -1,11 +1,15 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.vadyu/vadyu",
-  "title": "Vadyu AI Video Ad Studio",
-  "description": "Generate commercial multi-shot AI product video ads from image URLs with coherence grading.",
-  "version": "1.0.0",
-  "websiteUrl": "https://vadyu.com/api-docs",
+  "title": "Vadyu 2.0 AI Commercial Video Ad Studio",
+  "description": "Preview Shopify/DTC products and generate multi-cut AI video ads with 3D lighting and voiceover.",
+  "version": "2.0.0",
+  "websiteUrl": "https://vadyu.com/api-docs#mcp",
   "icons": [
+    {
+      "src": "https://vadyu.com/logo.svg",
+      "mimeType": "image/svg+xml"
+    },
     {
       "src": "https://vadyu.com/icon.png",
       "mimeType": "image/png"
@@ -22,8 +26,8 @@
       "headers": [
         {
           "name": "Authorization",
-          "description": "Bearer vadyu_live_<API_KEY> from https://vadyu.com/dashboard",
-          "isRequired": true,
+          "description": "Optional for storefront preview & catalog; Bearer vadyu_live_<API_KEY> for video rendering",
+          "isRequired": false,
           "isSecret": true
         }
       ]

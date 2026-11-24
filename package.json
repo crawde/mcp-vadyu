@@ -1,18 +1,26 @@
 {
   "name": "mcp-vadyu",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "mcpName": "com.vadyu/vadyu",
-  "description": "Official Model Context Protocol (MCP) server for Vadyu AI Video Ad Studio — generate commercial multi-shot product video ads from image URLs.",
+  "description": "Official Model Context Protocol (MCP) server for Vadyu 2.0 AI Commercial Video Ad Studio — preview Shopify/DTC products with zero auth and render multi-cut 9:16, 4:5, 1:1, and 16:9 commercial video ads with 3D studio lighting and AI voiceover.",
   "type": "module",
   "main": "vadyu-mcp.mjs",
   "bin": {
-    "mcp-vadyu": "vadyu-mcp.mjs"
+    "mcp-vadyu": "./vadyu-mcp.mjs",
+    "vadyu-mcp": "./vadyu-mcp.mjs"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "files": [
     "vadyu-mcp.mjs",
     "server.json",
     "glama.json",
     "smithery.yaml",
+    "gemini-extension.json",
+    ".mcp.json",
+    ".claude-plugin/plugin.json",
+    "llms-install.md",
     "README.md",
     "LICENSE"
   ],
@@ -26,18 +34,24 @@
     "vadyu",
     "ai-video-ads",
     "video-generation",
+    "shopify",
+    "dtc",
     "product-video",
     "tiktok-ads",
-    "ugc-ads",
+    "meta-ads",
     "ecommerce",
     "claude",
-    "cursor"
+    "cursor",
+    "gemini-cli-extension"
   ],
   "author": "Vadyu <hello@vadyu.com> (https://vadyu.com)",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/crawde/mcp-vadyu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/crawde/mcp-vadyu/issues"
   },
   "homepage": "https://vadyu.com/api-docs#mcp"
 }
