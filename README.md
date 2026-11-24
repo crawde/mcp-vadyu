@@ -1,6 +1,7 @@
 # Vadyu 2.0 MCP Server (`com.vadyu/vadyu`)
 
 [![Glama MCP Server](https://glama.ai/mcp/servers/crawde/mcp-vadyu/badges/score.svg)](https://glama.ai/mcp/servers/crawde/mcp-vadyu)
+[![Vadyu MCP Connector](https://glama.ai/mcp/connectors/com.vadyu/vadyu/badges/score.svg)](https://glama.ai/mcp/connectors/com.vadyu/vadyu)
 [![Verified on Appside](https://mcp.appside.build/mcp-servers/vadyu-com/badge.svg)](https://mcp.appside.build/mcp-servers/vadyu-com/)
 [![Official MCP Registry](https://img.shields.io/badge/MCP_Registry-com.vadyu%2Fvadyu_v2.0.0-10b981)](https://registry.modelcontextprotocol.io/v0/servers?search=vadyu)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
